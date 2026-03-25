@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.post("/enqueue", async (req, res) => {
-    const{ type , playload} = req.body;
+    const{ type , payload} = req.body;
 
     const task: Task ={
         id: uudiv4(),
@@ -20,7 +20,7 @@ app.post("/enqueue", async (req, res) => {
 
 await redis.lpush("queue",  JSON.stringify(task));
 
-res.json({message : "Task added", taskId: TextTrackList.id});
+res.json({message : "Task added", taskId: task.id});
 
 });
 

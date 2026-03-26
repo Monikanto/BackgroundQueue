@@ -1,9 +1,12 @@
 {
   "name": "backgroundqueue",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A lightweight Redis-backed background job queue with Express API",
+  "main": "dist/producer.js",
   "scripts": {
+    "dev:producer": "ts-node-dev --respawn src/producer.ts",
+    "dev:worker": "ts-node-dev --respawn src/worker.ts",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

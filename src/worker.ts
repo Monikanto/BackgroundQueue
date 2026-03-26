@@ -1,7 +1,6 @@
 import {redis} from "./redis";
 import {processTask} from "./processor"
 import { Metrics} from "./types";
-import { worker } from "cluster";
 
 const metrics : Metrics = {
     processed: 0,
@@ -9,7 +8,7 @@ const metrics : Metrics = {
     pending:0
 };
 
-const CONCURRENY = 3;
+const CONCURRENCY = 3;
 
 async function WorkerLoop() {
     while(true){
@@ -21,7 +20,7 @@ async function WorkerLoop() {
         }
         const task =  JSON.parse(taskData);
 
-        metrics.pending --;
+
         
         const success = await processTask(task);
 
@@ -40,7 +39,7 @@ function sleep(ms: number){
 }
 
 //start multiple workers
-for(let i = 0; i<CONCURRENY; i++){
+for(let i = 0; i<CONCURRENCY; i++){
     WorkerLoop();
 }
 
